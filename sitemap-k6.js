@@ -71,7 +71,7 @@ export default function (data) {
 
 export function handleSummary(data) {
   return {
-      "/app/summary.html": htmlReport(data),
+      "summary.html": htmlReport(data),
       stdout: textSummary(data, { indent: " ", enableColors: true }),
   };
 }
