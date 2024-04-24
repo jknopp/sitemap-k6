@@ -1,6 +1,8 @@
 import http from 'k6/http'
 import { group,  sleep } from 'k6'
-import { rand, sitemapUrls, getPage } from './lib/helpers.js'
+import { rand } from './lib/helpers.js'
+import { getPage } from './lib/pageService.js'
+import { sitemapUrls } from './lib/sitemapParser.js'
 import { textSummary } from "https://jslib.k6.io/k6-summary/0.0.1/index.js";
 import { htmlReport } from "https://raw.githubusercontent.com/benc-uk/k6-reporter/main/dist/bundle.js";
 import _ from 'https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js'
@@ -11,12 +13,10 @@ const metrics = new Metrics()
 export const options = {
     vus: 10,
     duration: '60s',
-    /*
-    stages: [
-        { duration: '20m', target: 1000 }, // simulate ramp-up of traffic from 1 to 1000 users over 20 minutes.
-        { duration: '10m', target: 1000 }, // stay at max load for 10 minutes
-    ],
-    */
+    // stages: [
+    //     { duration: '20m', target: 1000 }, // simulate ramp-up of traffic from 1 to 1000 users over 20 minutes.
+    //     { duration: '10m', target: 1000 }, // stay at max load for 10 minutes
+    // ]
 }
 
 //setup executes once at the start and passes data to the main function (default) which a VUser executes
